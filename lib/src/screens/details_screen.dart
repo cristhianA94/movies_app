@@ -16,7 +16,7 @@ class DetailsScreen extends StatelessWidget {
             delegate: SliverChildListDelegate([
           _PosterAndTitle(movie),
           _Overview(movie),
-          _Overview(movie),
+          // _Overview(movie),
           _Overview(movie),
           CastingCards(movie.id)
         ]))
@@ -52,7 +52,7 @@ class _CustomAppBar extends StatelessWidget {
           ),
         ),
         background: FadeInImage(
-          placeholder: AssetImage('assets/loading.gif'),
+          placeholder: AssetImage('assets/img/loading.gif'),
           image: NetworkImage(movie.fullBackdropPath),
           fit: BoxFit.cover,
         ),
@@ -81,7 +81,7 @@ class _PosterAndTitle extends StatelessWidget {
             child: ClipRRect(
               borderRadius: BorderRadius.circular(20),
               child: FadeInImage(
-                placeholder: AssetImage('assets/no-image.jpg'),
+                placeholder: AssetImage('assets/img/no-image.jpg'),
                 image: NetworkImage(movie.fullPosterImg),
                 height: 150,
               ),

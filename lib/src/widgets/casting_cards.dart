@@ -56,7 +56,7 @@ class _CastCard extends StatelessWidget {
           ClipRRect(
             borderRadius: BorderRadius.circular(20),
             child: FadeInImage(
-              placeholder: AssetImage('assets/no-image.jpg'),
+              placeholder: AssetImage('assets/img/no-image.jpg'),
               image: NetworkImage(actor.fullProfilePath),
               height: 140,
               width: 100,
