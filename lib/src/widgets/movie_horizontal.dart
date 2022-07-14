@@ -63,7 +63,7 @@ class MovieHorizontal extends StatelessWidget {
           ),
           SizedBox(),
           Text(
-            pelicula.title,
+            pelicula.title!,
             // Pone ... cuando ya no cabe
             overflow: TextOverflow.ellipsis,
             style: Theme.of(context).textTheme.caption,

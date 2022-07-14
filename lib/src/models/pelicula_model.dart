@@ -16,22 +16,22 @@ class Peliculas {
 
 class Pelicula {
   // Var para identificar id unico
-  String uniqueId;
+  late String uniqueId;
 
-  int id;
-  int voteCount;
-  double popularity;
-  bool video;
-  String posterPath;
-  bool adult;
-  String backdropPath;
-  String originalLanguage;
-  String originalTitle;
-  List<int> genreIds;
-  String title;
-  double voteAverage;
-  String overview;
-  String releaseDate;
+  int? id;
+  int? voteCount;
+  double? popularity;
+  bool? video;
+  String? posterPath;
+  bool? adult;
+  String? backdropPath;
+  String? originalLanguage;
+  String? originalTitle;
+  List<int>? genreIds;
+  String? title;
+  double? voteAverage;
+  String? overview;
+  String? releaseDate;
 
   Pelicula({
     this.id,

@@ -8,7 +8,7 @@ import 'package:http/http.dart' as http;
 
 // TODO API REST
 class PeliculasProvider {
-  String _apiKey = 'apiKey';
+  String _apiKey = 'b29bb05000b0f589f26d976a0654fcb4';
   String _url = 'api.themoviedb.org';
   String _languaje = 'es-ES';
 

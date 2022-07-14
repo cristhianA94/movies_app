@@ -24,8 +24,7 @@ class MoviesProvider extends ChangeNotifier {
     duration: Duration(milliseconds: 500),
   );
 
-  final StreamController<List<Movie>> _suggestionStreamContoller =
-      new StreamController.broadcast();
+  final StreamController<List<Movie>> _suggestionStreamContoller = StreamController.broadcast();
   Stream<List<Movie>> get suggestionStream =>
       this._suggestionStreamContoller.stream;
 
