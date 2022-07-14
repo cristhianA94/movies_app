@@ -18,6 +18,4 @@ String _apiKey = 'apiKey';
 
 ## Screenshots
 
-![Home](https://user-images.githubusercontent.com/24251638/98760849-2e190d80-23a2-11eb-8dae-1f1499a5d216.jpg)
-![Detail](https://user-images.githubusercontent.com/24251638/98760861-3113fe00-23a2-11eb-964b-1662081a7d2c.jpg)
-![Search](https://user-images.githubusercontent.com/24251638/98760847-2ce7e080-23a2-11eb-8818-fa087d375cdc.jpg)
+![App](https://media0.giphy.com/media/G81kx7d6gc58lPJ99R/giphy.gif?cid=790b7611913fbc205acd279c265d636f7a273ae685050428&rid=giphy.gif&ct=g)
