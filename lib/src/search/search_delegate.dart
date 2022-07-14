@@ -1,125 +1,97 @@
 import 'package:flutter/material.dart';
-import 'package:movies_app/src/models/pelicula_model.dart';
-import 'package:movies_app/src/providers/peliculas_provider.dart';
+import 'package:movies_app/src/models/models.dart';
+import 'package:provider/provider.dart';
+import 'package:movies_app/src/providers/movies_provider.dart';
 
-class DataSearch extends SearchDelegate {
-  final peliculasProvider = new PeliculasProvider();
-
-  String selection = '';
-  final peliculas = [
-    'Iron Man',
-    'Spiderman',
-    'Avengers',
-    'Thor',
-    'La roca',
-    'Putos 2',
-    'Putos 1'
-  ];
-
-  final peliculasRecientes = ['Avengers', 'Putos 2'];
+class MovieSearchDelegate extends SearchDelegate {
+  @override
+  String get searchFieldLabel => 'Buscar película';
 
   @override
   List<Widget> buildActions(BuildContext context) {
-    // Acciones de nuestro AppBar (icono 'X' o cancelar)
     return [
       IconButton(
-          icon: Icon(Icons.clear),
-          onPressed: () {
-            // Limpia el input
-            query = '';
-          })
+        icon: Icon(Icons.clear),
+        onPressed: () => query = '',
+      )
     ];
   }
 
   @override
   Widget buildLeading(BuildContext context) {
-    // Icono a la izquierda del AppBar
     return IconButton(
-        icon: AnimatedIcon(
-          icon: AnimatedIcons.menu_arrow,
-          progress: transitionAnimation,
-        ),
-        onPressed: () {
-          // Permite volver a la pantalla anterior
-          close(context, null);
-        });
+      icon: Icon(Icons.arrow_back),
+      onPressed: () {
+        close(context, null);
+      },
+    );
   }
 
-  // No utilizado> Se puede dibujar nuevos widgets despues de buscar
   @override
   Widget buildResults(BuildContext context) {
-    // Crea los resultados a mostrar
-    return Center(
-        child: Container(
-      height: 100.0,
-      width: 100.0,
-      color: Colors.amber,
-      child: Text(selection),
-    ));
+    return Text('buildResults');
+  }
+
+  Widget _emptyContainer() {
+    return Container(
+      child: Center(
+        child: Icon(
+          Icons.movie_creation_outlined,
+          color: Colors.black38,
+          size: 130,
+        ),
+      ),
+    );
   }
 
   @override
   Widget buildSuggestions(BuildContext context) {
-    // Sugerencias que aparecen cuando la persona escribe
-    if (query.isEmpty) return Container();
+    if (query.isEmpty) {
+      return _emptyContainer();
+    }
 
-    return FutureBuilder(
-      future: peliculasProvider.buscarPelicula(query),
-      builder: (BuildContext context, AsyncSnapshot<List<Pelicula>> snapshot) {
-        if (snapshot.hasData) {
-          final peliculas = snapshot.data;
+    final moviesProvider = Provider.of<MoviesProvider>(context, listen: false);
+    moviesProvider.getSuggestionsByQuery(query);
 
-          return ListView(
-              children: peliculas.map((peli) {
-            return ListTile(
-              leading: FadeInImage(
-                image: NetworkImage(peli.getPosterImg()),
-                placeholder: AssetImage('assets/img/no-image.jpg'),
-                width: 50.0,
-                fit: BoxFit.cover,
-              ),
-              title: Text(peli.title),
-              subtitle: Text(peli.originalTitle),
-              onTap: () {
-                close(context, null);
-                peli.uniqueId = '';
-                Navigator.pushNamed(context, 'detalle', arguments: peli);
-              },
-            );
-          }).toList());
-        } else {
-          return Center(child: CircularProgressIndicator());
-        }
+    return StreamBuilder(
+      stream: moviesProvider.suggestionStream,
+      builder: (_, AsyncSnapshot<List<Movie>> snapshot) {
+        if (!snapshot.hasData) return _emptyContainer();
+
+        final movies = snapshot.data!;
+
+        return ListView.builder(
+            itemCount: movies.length,
+            itemBuilder: (_, int index) => _MovieItem(movies[index]));
       },
     );
   }
+}
 
-  /*
-  // Test
+class _MovieItem extends StatelessWidget {
+  final Movie movie;
+
+  const _MovieItem(this.movie);
+
   @override
-  Widget buildSuggestions(BuildContext context) {
-    // Sugerencias que aparecen cuando la persona escribe
-    // TODO Filtro search
-    final listaSugerida = (query.isEmpty)
-        ? peliculasRecientes
-        : peliculas
-            .where(
-                (movie) => movie.toLowerCase().startsWith(query.toLowerCase()))
-            .toList();
+  Widget build(BuildContext context) {
+    movie.heroId = 'search-${movie.id}';
 
-    return ListView.builder(
-      itemCount: listaSugerida.length,
-      itemBuilder: (context, i) {
-        return ListTile(
-          leading: Icon(Icons.movie),
-          title: Text(listaSugerida[i]),
-          onTap: () {
-            // Setea el nombre seleccionado de la lista
-            selection = listaSugerida[i];
-            showResults(context);
-          },
-        );
+    return ListTile(
+      leading: Hero(
+        tag: movie.heroId!,
+        child: FadeInImage(
+          placeholder: AssetImage('assets/no-image.jpg'),
+          image: NetworkImage(movie.fullPosterImg),
+          width: 50,
+          fit: BoxFit.contain,
+        ),
+      ),
+      title: Text(movie.title),
+      subtitle: Text(movie.originalTitle),
+      onTap: () {
+        Navigator.pushNamed(context, 'details', arguments: movie);
       },
     );
-  } */
+  }
 }

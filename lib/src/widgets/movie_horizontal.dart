@@ -6,7 +6,7 @@ class MovieHorizontal extends StatelessWidget {
   final Function siguientePagina;
 
   // Constructor
-  MovieHorizontal({@required this.peliculas, @required this.siguientePagina});
+  MovieHorizontal({required this.peliculas, required this.siguientePagina});
   // Controller
   final _pageController =
       new PageController(initialPage: 1, viewportFraction: 0.3);

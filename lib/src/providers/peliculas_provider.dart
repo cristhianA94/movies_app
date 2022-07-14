@@ -16,7 +16,7 @@ class PeliculasProvider {
   bool _cargando = false;
 
   // TODO Stream
-  List<Pelicula> _populares = new List();
+  List<Pelicula> _populares = [];
   // Instancia del Stream
   // Broadcast permite que se utilice este Stream para varias llamadas
   final _popularesStreamController =
@@ -30,7 +30,7 @@ class PeliculasProvider {
       _popularesStreamController.stream;
 
   void disposeStream() {
-    _popularesStreamController?.close();
+    _popularesStreamController.close();
   }
   // TODO Fin Stream
 

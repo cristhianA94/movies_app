@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+/* import 'package:flutter/material.dart';
 import 'package:movies_app/src/models/actores_model.dart';
 
 import 'package:movies_app/src/models/pelicula_model.dart';
@@ -189,3 +189,4 @@ class PeliculaDetalle extends StatelessWidget {
     );
   }
 }
+ */

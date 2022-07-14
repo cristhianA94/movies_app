@@ -1,12 +1,10 @@
 class Peliculas {
-  List<Pelicula> items = new List();
+  List<Pelicula> items = [];
 
   Peliculas();
 
   // Transforma el Json a una lista
   Peliculas.fromJsonList(List<dynamic> jsonList) {
-    if (jsonList == null) return;
-
     for (var item in jsonList) {
       // Instancia de cada pelicula
       final pelicula = new Pelicula.fromJsonMap(item);

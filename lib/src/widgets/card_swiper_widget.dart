@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_card_swipper/flutter_card_swiper.dart';
 
 import 'package:movies_app/src/models/pelicula_model.dart';
 // Transicion imagenes
-import 'package:flutter_swiper/flutter_swiper.dart';
 
 class CardSwiper extends StatelessWidget {
   final List<Pelicula> peliculas;
 
   // Constructor
-  CardSwiper({@required this.peliculas});
+  CardSwiper({required this.peliculas});
 
   @override
   Widget build(BuildContext context) {
